@@ -1,40 +1,25 @@
 package ar.uba.fi.tdd.rulogic.model.schema;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 
 /**
  * Created by costa on 28/10/2017.
+ * Fact extends Element
  */
-public class Fact implements Element {
+public class Fact extends Element {
 
-    private String line;
-    private String name;
-    private List<String> arguments;
-    private boolean valid;
-    private final String FACT_PATTERN = "^([^\\(\\)]*)\\(([^\\(\\)]*)\\)\\.?$";
+    private final String FACT_PATTERN = "^([^\\(\\)]*)\\(([^\\(\\)]*)\\)(\\s+)?\\.?$";
 
     Fact(String content) {
-      this.setLine(content);
+        this.setLine(content);
     }
 
-    public void setLine(String line) {
-        this.line = line;
-        this.setValid(isFact(line));
-        if (this.isValid()) {
-            this.setName(line);
-            this.setArguments(line);
-        }
-    }
-
-    public void setValid(boolean valid) {
-        this.valid = valid;
-    }
-
-    public boolean isValid() {
-        return valid;
+    protected void setIsValid(String line) {
+        boolean valid = this.isFact(line);
+        this.setIsValid(valid);
     }
 
     private boolean isFact(String line) {
@@ -42,35 +27,24 @@ public class Fact implements Element {
         return Pattern.matches(FACT_PATTERN,line);
     }
 
-    public void setName(String line) {
+    protected void setName(String line) {
         this.name = line.substring(0, line.indexOf('('));
     }
 
-    public void setArguments(String arguments) {
+    protected void setArguments(String arguments) {
         this.arguments = null;
         String betweenParentheses = arguments.substring(arguments.indexOf('(') + 1, arguments.indexOf(')'));
-        if ((betweenParentheses != null) && !(betweenParentheses.isEmpty())) {
-            String[] splitedArguments = betweenParentheses.split(",");
-            this.arguments = Arrays.asList(splitedArguments);
+        if (betweenParentheses.isEmpty()) {
+            return;
         }
+        String[] splitedArguments = betweenParentheses.split(",");
+        this.arguments = Arrays.asList(splitedArguments);
+        this.arguments = this.arguments.stream().map(String::trim).collect(Collectors.toList());
     }
 
     public boolean evaluate(Element element) {
-        return false;
-    }
-
-    public String getLine() {
-        return line;
-    }
-
-
-    public String getName() {
-        return name;
-    }
-
-
-    public List<String> getArguments() {
-        return arguments;
+        return (this.getName().equals(element.getName())
+                && this.getArguments().equals(element.getArguments()));
     }
 
 }
