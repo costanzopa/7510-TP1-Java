@@ -1,6 +1,7 @@
 package ar.uba.fi.tdd.rulogic.model.schema;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
@@ -9,15 +10,19 @@ import java.util.stream.Collectors;
  * Created by costa on 28/10/2017.
  * Fact extends Element
  */
-public class Fact extends Element {
+public class Fact implements Element {
 
     private final String FACT_PATTERN = "^([^\\(\\)]*)\\(([^\\(\\)]*)\\)(\\s+)?\\.?$";
+    private String name;
+    private String line;
+    private List<String> arguments;
+    private boolean valid;
 
     Fact(String content) {
         this.setLine(content);
     }
 
-    protected void setIsValid(String line) {
+    private void setIsValid(String line) {
         boolean valid = this.isFact(line);
         this.setIsValid(valid);
     }
@@ -27,11 +32,30 @@ public class Fact extends Element {
         return Pattern.matches(FACT_PATTERN,line);
     }
 
-    protected void setName(String line) {
+
+    private boolean equals(Element element) {
+        return (this.getName().equals(element.getName())
+                && this.getArguments().equals(element.getArguments()));
+    }
+
+    private void setLine(String line) {
+        this.line = line;
+        this.setIsValid(line);
+        if (this.isValid()) {
+            this.setName(line);
+            this.setArguments(line);
+        }
+    }
+
+    private void setIsValid(boolean valid) {
+        this.valid = valid;
+    }
+
+    private void setName(String line) {
         this.name = line.substring(0, line.indexOf('('));
     }
 
-    protected void setArguments(String arguments) {
+    private void setArguments(String arguments) {
         this.arguments = null;
         String betweenParentheses = arguments.substring(arguments.indexOf('(') + 1, arguments.indexOf(')'));
         if (betweenParentheses.isEmpty()) {
@@ -42,9 +66,26 @@ public class Fact extends Element {
         this.arguments = this.arguments.stream().map(String::trim).collect(Collectors.toList());
     }
 
+    @Override
     public boolean evaluate(Element element) {
-        return (this.getName().equals(element.getName())
-                && this.getArguments().equals(element.getArguments()));
+        return (this.equals(element));
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public String getLine() {
+        return line;
+    }
+
+    public List<String> getArguments() {
+        return this.arguments;
+    }
+
+
+    public boolean isValid() {
+        return valid;
     }
 
 }
