@@ -4,7 +4,7 @@ import java.util.List;
 
 /**
  * Created by costa on 28/10/2017.
- * Element abstract Class.
+ * Element Interface.
  */
 public interface Element {
 
@@ -14,4 +14,6 @@ public interface Element {
     String getName();
 
     List<String> getArguments();
+
+    List<Element> getRightSide();
 }

@@ -83,6 +83,11 @@ public class Fact implements Element {
         return this.arguments;
     }
 
+    @Override
+    public List<Element> getRightSide() {
+        return null;
+    }
+
 
     public boolean isValid() {
         return valid;
