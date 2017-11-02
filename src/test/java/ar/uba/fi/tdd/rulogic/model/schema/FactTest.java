@@ -75,4 +75,26 @@ public class FactTest {
         Fact testFact2 = new Fact("varon(nicolas).");
         Assert.assertFalse(testFact.evaluate(testFact2));
     }
+
+    @Test
+    public void evaluateRightSideFactTest() {
+        when(fact.getRightSide()).thenReturn(null);
+        Fact testFact = new Fact("hermano(nicolas, roberto).");
+        Assert.assertEquals(fact.getRightSide(),testFact.getRightSide());
+    }
+
+    @Test
+    public void getLineFactTest() {
+        String expected = "hermano(nicolas, roberto).";
+        when(fact.getLine()).thenReturn(expected);
+        Fact testFact = new Fact("hermano(nicolas, roberto).");
+        Assert.assertEquals(fact.getLine(),testFact.getLine());
+    }
+
+    @Test
+    public void isValidFalseWithoutArgumentsTest() {
+        when(fact.isValid()).thenReturn(false);
+        Fact testFact = new Fact("varon ()");
+        Assert.assertEquals(fact.isValid(),testFact.isValid());
+    }
 }

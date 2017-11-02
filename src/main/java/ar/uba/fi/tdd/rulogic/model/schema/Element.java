@@ -6,14 +6,28 @@ import java.util.List;
  * Created by costa on 28/10/2017.
  * Element Interface.
  */
-public interface Element {
+public abstract class Element {
+    private String line;
+    private boolean valid;
 
-    boolean evaluate(Element element);
-    boolean isValid();
+    String getLine() {
+        return line;
+    }
+    protected void setLine(String line) {this.line = line;}
 
-    String getName();
+    public boolean isValid() {
+        return this.valid;
+    }
+    void setValid(boolean valid) {
+        this.valid = valid;
+    }
 
-    List<String> getArguments();
 
-    List<Element> getRightSide();
+    public abstract boolean evaluate(Element element);
+
+    public abstract String getName();
+    public abstract List<String> getArguments();
+    public abstract List<Element> getRightSide();
+
+
 }

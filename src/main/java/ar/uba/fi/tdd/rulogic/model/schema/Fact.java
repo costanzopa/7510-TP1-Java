@@ -10,11 +10,10 @@ import java.util.stream.Collectors;
  * Created by costa on 28/10/2017.
  * Fact extends Element
  */
-public class Fact implements Element {
+public class Fact extends Element {
 
     private final String FACT_PATTERN = "^([^\\(\\)]*)\\(([^\\(\\)]*)\\)(\\s+)?\\.?$";
     private String name;
-    private String line;
     private List<String> arguments;
     private boolean valid;
 
@@ -38,8 +37,8 @@ public class Fact implements Element {
                 && this.getArguments().equals(element.getArguments()));
     }
 
-    private void setLine(String line) {
-        this.line = line;
+    protected void setLine(String line) {
+        super.setLine(line);
         this.setIsValid(line);
         if (this.isValid()) {
             this.setName(line);
@@ -53,12 +52,14 @@ public class Fact implements Element {
 
     private void setName(String line) {
         this.name = line.substring(0, line.indexOf('('));
+        this.name = this.name.trim();
     }
 
     private void setArguments(String arguments) {
         this.arguments = null;
         String betweenParentheses = arguments.substring(arguments.indexOf('(') + 1, arguments.indexOf(')'));
         if (betweenParentheses.isEmpty()) {
+            this.setIsValid(false);
             return;
         }
         String[] splitedArguments = betweenParentheses.split(",");
@@ -75,9 +76,6 @@ public class Fact implements Element {
         return this.name;
     }
 
-    public String getLine() {
-        return line;
-    }
 
     public List<String> getArguments() {
         return this.arguments;
