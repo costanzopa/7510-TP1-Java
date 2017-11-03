@@ -12,7 +12,7 @@ public class Rule extends Element {
     private Fact leftSide;
     private List<Element> rightSide;
 
-    Rule(String content) {
+    public Rule(String content) {
         this.setLine(content);
         this.setLeftSide(content);
         this.rightSide = null;

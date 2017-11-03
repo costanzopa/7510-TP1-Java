@@ -17,7 +17,7 @@ public class Fact extends Element {
     private List<String> arguments;
     private boolean valid;
 
-    Fact(String content) {
+    public Fact(String content) {
         this.setLine(content);
     }
 
