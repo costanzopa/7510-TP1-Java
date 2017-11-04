@@ -51,20 +51,15 @@ public class  Database implements IDatabase {
     }
 
     private boolean evaluate(Element queryElement) {
-        Iterator<Element> iterator = this.getElements().iterator();
-
-        while (iterator.hasNext()) {
-            Element element = iterator.next();
-            if (element.evaluate(queryElement)){
+        for (Element element : this.getElements()) {
+            if (element.evaluate(queryElement)) {
                 if (element.getRightSide() == null) {
                     return true;
                 } else {
-                    Iterator<Element> rightSide = element.getRightSide().iterator();
-                    while (rightSide.hasNext()) {
-                        Element fact = iterator.next();
-                        Element newQueryElement = combineArguments(element.getArguments(),queryElement.getArguments(),fact);
+                    for (Element fact : element.getRightSide()) {
+                        Element newQueryElement = combineArguments(element.getArguments(), queryElement.getArguments(), fact);
                         if (!evaluate(newQueryElement)) {
-                           return false;
+                            return false;
                         }
                     }
                     return true;
@@ -74,7 +69,7 @@ public class  Database implements IDatabase {
         return false;
     }
 
-    private Element combineArguments(List<String> arguments, List<String> queryElementArguments, Element fact) {
+    private  Element combineArguments(List<String> arguments, List<String> queryElementArguments, Element fact) {
         String line = fact.getLine();
         Iterator<String> iteratorToBeReplace = arguments.iterator();
         Iterator<String> iteratorToReplace =queryElementArguments.iterator();

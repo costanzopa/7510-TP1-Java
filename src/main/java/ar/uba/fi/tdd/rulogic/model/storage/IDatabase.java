@@ -14,6 +14,6 @@ public interface IDatabase {
     void store(String content);
     String getInvalidLine();
     List<Element> getElements();
-    boolean query(String query);
 
+    boolean query(String query);
 }

@@ -16,7 +16,6 @@ public class FileParserCreator extends ParserCreator {
         try {
             return new FileParser(this.getFileName());
         } catch (FileNotFoundException e) {
-            System.out.println("El File name es invalido.");
             e.printStackTrace();
             return null;
         }

@@ -131,11 +131,51 @@ public class DatabaseTest {
 
     @Test
     public void fileParseDatabaseIsInValidTest() {
-        parserCreator = new StringParserCreator(incomplete_database);
+        parserCreator = new FileParserCreator(incomplete_database);
         parser = parserCreator.createParser();
 
         database = parser.parse();
 
         Assert.assertFalse(database.isValid());
+    }
+
+    @Test
+    public void evaluateQueryFactTrueTest() {
+        parserCreator = new FileParserCreator(rule_db);
+        parser = parserCreator.createParser();
+
+        database = parser.parse();
+        String query = "varon(roberto).";
+        Assert.assertTrue(database.query(query));
+    }
+
+    @Test
+    public void evaluateQueryFactFalseTest() {
+        parserCreator = new FileParserCreator(rule_db);
+        parser = parserCreator.createParser();
+
+        database = parser.parse();
+        String query = "varon(ricardo).";
+        Assert.assertFalse(database.query(query));
+    }
+
+    @Test
+    public void evaluateQueryRuleTrueTest() {
+        parserCreator = new FileParserCreator(rule_db);
+        parser = parserCreator.createParser();
+
+        database = parser.parse();
+        String query = "hijo(pepe, juan).";
+        Assert.assertTrue(database.query(query));
+    }
+
+    @Test
+    public void evaluateQueryRuleFalseTest() {
+        parserCreator = new FileParserCreator(rule_db);
+        parser = parserCreator.createParser();
+
+        database = parser.parse();
+        String query = "hijo(juan, pepe).";
+        Assert.assertFalse(database.query(query));
     }
 }
