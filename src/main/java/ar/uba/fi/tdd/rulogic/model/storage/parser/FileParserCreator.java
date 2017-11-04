@@ -16,12 +16,11 @@ public class FileParserCreator extends ParserCreator {
         try {
             return new FileParser(this.getFileName());
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
             return null;
         }
     }
 
-    public String getFileName() {
+    private String getFileName() {
         return fileName;
     }
 

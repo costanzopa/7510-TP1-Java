@@ -40,12 +40,14 @@ public class  Database implements IDatabase {
     }
 
     @Override
-    public boolean query(String query) {
-        boolean answer = false;
+    public boolean query(String query) throws Exception {
+        boolean answer;
         Creator creator = new FactCreator();
         Element queryElement = creator.factoryMethod(query);
         if (queryElement.isValid()) {
             answer = evaluate(queryElement);
+        } else {
+            throw new Exception("Invalid Query: " + query);
         }
         return answer;
     }

@@ -140,7 +140,7 @@ public class DatabaseTest {
     }
 
     @Test
-    public void evaluateQueryFactTrueTest() {
+    public void evaluateQueryFactTrueTest() throws Exception {
         parserCreator = new FileParserCreator(rule_db);
         parser = parserCreator.createParser();
 
@@ -150,7 +150,7 @@ public class DatabaseTest {
     }
 
     @Test
-    public void evaluateQueryFactFalseTest() {
+    public void evaluateQueryFactFalseTest() throws Exception {
         parserCreator = new FileParserCreator(rule_db);
         parser = parserCreator.createParser();
 
@@ -160,7 +160,7 @@ public class DatabaseTest {
     }
 
     @Test
-    public void evaluateQueryRuleTrueTest() {
+    public void evaluateQueryRuleTrueTest() throws Exception {
         parserCreator = new FileParserCreator(rule_db);
         parser = parserCreator.createParser();
 
@@ -170,7 +170,7 @@ public class DatabaseTest {
     }
 
     @Test
-    public void evaluateQueryRuleFalseTest() {
+    public void evaluateQueryRuleFalseTest() throws Exception {
         parserCreator = new FileParserCreator(rule_db);
         parser = parserCreator.createParser();
 

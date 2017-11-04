@@ -15,5 +15,5 @@ public interface IDatabase {
     String getInvalidLine();
     List<Element> getElements();
 
-    boolean query(String query);
+    boolean query(String query) throws Exception;
 }
