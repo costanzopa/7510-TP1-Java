@@ -3,6 +3,7 @@ package ar.uba.fi.tdd.rulogic.model.storage;
 import ar.uba.fi.tdd.rulogic.model.schema.Element;
 import ar.uba.fi.tdd.rulogic.model.schema.Fact;
 import ar.uba.fi.tdd.rulogic.model.schema.Rule;
+import ar.uba.fi.tdd.rulogic.model.storage.parser.FileParserCreator;
 import ar.uba.fi.tdd.rulogic.model.storage.parser.Parser;
 import ar.uba.fi.tdd.rulogic.model.storage.parser.ParserCreator;
 import ar.uba.fi.tdd.rulogic.model.storage.parser.StringParserCreator;
@@ -60,6 +61,12 @@ public class DatabaseTest {
             "\tadd(two, two, one).\n" +
             "\tsubtract(X, Y, Z) :- add(Y, Z, X).";
 
+
+
+    private String rule_db = "src/main/resources/rules.db";
+    private String incomplete_database = "src/main/resources/incomplete_database.db";
+
+
     @Before
     public void setUp() throws Exception {
         initMocks(this);
@@ -110,5 +117,25 @@ public class DatabaseTest {
         Assert.assertEquals(databaseTest.getElements().get(0).getName(),database.getElements().get(0).getName());
         Assert.assertEquals(databaseTest.getElements().get(1).getName(),database.getElements().get(1).getName());
         Assert.assertEquals(databaseTest.getElements().get(2).getName(),database.getElements().get(2).getName());
+    }
+
+    @Test
+    public void fileParseDatabaseIsValidTest() {
+        parserCreator = new FileParserCreator(rule_db);
+        parser = parserCreator.createParser();
+
+        database = parser.parse();
+
+        Assert.assertTrue(database.isValid());
+    }
+
+    @Test
+    public void fileParseDatabaseIsInValidTest() {
+        parserCreator = new StringParserCreator(incomplete_database);
+        parser = parserCreator.createParser();
+
+        database = parser.parse();
+
+        Assert.assertFalse(database.isValid());
     }
 }

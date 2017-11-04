@@ -10,7 +10,7 @@ public abstract class Element {
     private String line;
     private boolean valid;
 
-    String getLine() {
+    public String getLine() {
         return line;
     }
     protected void setLine(String line) {this.line = line;}
