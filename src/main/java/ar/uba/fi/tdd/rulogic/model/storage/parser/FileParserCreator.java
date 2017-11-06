@@ -4,7 +4,7 @@ import java.io.FileNotFoundException;
 
 /**
  * Created by costa on 3/11/2017.
- * Add Comments
+ * FileParser factory implements Factory method pattern
  */
 public class FileParserCreator extends ParserCreator {
     private String fileName;

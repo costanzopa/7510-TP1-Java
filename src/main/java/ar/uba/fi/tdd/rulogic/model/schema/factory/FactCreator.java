@@ -5,7 +5,7 @@ import ar.uba.fi.tdd.rulogic.model.schema.Fact;
 
 /**
  * Created by costa on 2/11/2017.
- * Add Comments
+ * Fact factory implements Factory method pattern
  */
 public class FactCreator implements Creator{
     @Override

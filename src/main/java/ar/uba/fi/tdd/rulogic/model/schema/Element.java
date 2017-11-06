@@ -4,7 +4,7 @@ import java.util.List;
 
 /**
  * Created by costa on 28/10/2017.
- * Element Interface.
+ * Element Abstact Class.
  */
 public abstract class Element {
     private String line;

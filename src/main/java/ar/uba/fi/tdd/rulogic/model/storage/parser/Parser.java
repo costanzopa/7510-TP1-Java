@@ -9,7 +9,7 @@ import java.io.Reader;
 
 /**
  * Created by costa on 27/10/2017.
- * Add Comments
+ * Model abstract Parser
  */
 public abstract class Parser {
     private Reader reader;

@@ -63,6 +63,43 @@ public class KnowledgeBaseTest {
 	}
 
 	@Test
+	public void  varonJuanShouldBeTrueTest () throws Exception {
+		ParserCreator creator = new FileParserCreator(parentDatabase);
+		knowledgeBase = new KnowledgeBase(creator.createParser());
+		knowledgeBase.init();
+		Assert.assertTrue(this.knowledgeBase.answer("varon(juan)"));
+
+	}
+
+	@Test
+	public void  varonMariaShouldBeFalseTest () throws Exception {
+		ParserCreator creator = new FileParserCreator(parentDatabase);
+		knowledgeBase = new KnowledgeBase(creator.createParser());
+		knowledgeBase.init();
+		Assert.assertFalse(this.knowledgeBase.answer("varon(maria)"));
+
+	}
+
+	@Test
+	public void  hijoPepeJuanShouldBeTrueTest () throws Exception {
+		ParserCreator creator = new FileParserCreator(parentDatabase);
+		knowledgeBase = new KnowledgeBase(creator.createParser());
+		knowledgeBase.init();
+		Assert.assertTrue(this.knowledgeBase.answer("hijo(pepe, juan)"));
+
+	}
+
+	@Test
+	public void  hijoMariaRobertoShouldBeFalseTest () throws Exception {
+		ParserCreator creator = new FileParserCreator(parentDatabase);
+		knowledgeBase = new KnowledgeBase(creator.createParser());
+		knowledgeBase.init();
+		Assert.assertFalse(this.knowledgeBase.answer("hija(maria, roberto)"));
+
+	}
+
+
+	@Test
 	public void test() throws Exception {
 		knowledgeBase = new KnowledgeBase(new FileParser(rule_db));
 		knowledgeBase.init();

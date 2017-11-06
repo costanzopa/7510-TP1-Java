@@ -4,7 +4,7 @@ import ar.uba.fi.tdd.rulogic.model.schema.Element;
 
 /**
  * Created by costa on 28/10/2017.
- * Add Comments
+ * Interface for elements factory
  */
 
 public interface  Creator{

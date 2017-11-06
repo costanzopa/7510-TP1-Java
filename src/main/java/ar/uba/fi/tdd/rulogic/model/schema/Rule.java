@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * Created by costa on 29/10/2017.
- * asdadasd
+ * Model Rules
  */
 public class Rule extends Element {
     private static final java.lang.String RULE_PATTERN = ":-";

@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * Created by costa on 3/11/2017.
- * Add Comments
+ * Interface to model databases
  */
 public interface IDatabase {
     void setInvalid();

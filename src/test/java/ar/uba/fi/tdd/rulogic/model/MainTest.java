@@ -47,4 +47,16 @@ public class MainTest {
         Assert.assertTrue(baos.toString().contains("SI"));
     }
 
+    @Test
+    public void testPrintHelpMain() throws Exception {
+        String[] args = new String[0];
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        PrintStream ps = new PrintStream(baos);
+        PrintStream old = System.out;
+        System.setOut(ps);
+        App.main(args);
+        System.out.flush();
+        System.setOut(old);
+        Assert.assertTrue(baos.toString().contains("./main"));
+    }
 }

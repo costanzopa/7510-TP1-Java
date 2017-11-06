@@ -2,7 +2,7 @@ package ar.uba.fi.tdd.rulogic.model.storage.parser;
 
 /**
  * Created by costa on 27/10/2017.
- * Add Comments
+ * String factory implements Factory method pattern
  */
 public class StringParserCreator extends ParserCreator{
     private String content;
